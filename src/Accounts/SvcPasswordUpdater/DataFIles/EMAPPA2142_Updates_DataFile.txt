@@ -1,0 +1,5 @@
+D:\Soft\ARTS\bin\ArtsBatch.exe.config
+D:\Soft\ImportFromInfinity\ImportFromInfinity.exe
+D:\Soft\ImportFromInfinity\ImportFromInfinity.exe.config
+D:\Soft\ProductCreatorService\ProductCreatorService.exe.config
+D:\UTILS\eRun\searchAccount.ps1

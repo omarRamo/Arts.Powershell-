@@ -1,0 +1,10 @@
+D:\APPLICATIONS\RctWindowsService\RCTServiceWindows.exe.config
+D:\Soft\ARTS\bin\ArtsBatch.exe.config
+D:\Soft\ArtsBridgeRfaNetV2\ArtsBridgeRfaNetV2.InstallLog
+D:\Soft\ArtsBridgeRfaNetV2\ArtsBridgeRfaNetV2.InstallState
+D:\Soft\ArtsBridgeRfaNetV2 - Copy\ArtsBridgeRfaNetV2.InstallLog
+D:\Soft\ArtsBridgeRfaNetV2 - Copy\ArtsBridgeRfaNetV2.InstallState
+C:\Program Files\Altiris\Altiris Agent\Agents\SoftwareManagement\Software Delivery\AeXSWDPolicy.xml
+C:\Program Files\Altiris\Altiris Agent\Client Policies\emnspa04.emea.cib.cm.svc_arts.xml
+C:\Program Files\Altiris\Altiris Agent\AeXLastBasicInventory.xml
+C:\Users\UT2MSZ_SO\Desktop\MmsrFileScanner.INT.v0.5\README.txt

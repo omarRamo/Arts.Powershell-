@@ -1,0 +1,7 @@
+C:\Program Files (x86)\Calyon\RCTServiceWindows\
+D:\LOGS\DUMP\Misc\w3wp.exe__WebArts__PID__11316__Date__07_29_2020__Time_08_21_33AM__177__Manual Dump.dmp
+D:\INETPUB\ARTS\ContribEngine\Web.config_20220401
+D:\INETPUB\Reporting\
+D:\INETPUB\ARTS\ArtsBatchServicesEngine\Web.bak.config
+D:\INETPUB\ARTS\backup\contribIndicesApi\Web.config
+D:\INETPUB\ARTS\backup\WebArts_20220401\Web.config

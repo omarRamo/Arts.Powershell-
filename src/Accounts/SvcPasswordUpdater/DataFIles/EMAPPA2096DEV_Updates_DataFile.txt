@@ -1,0 +1,5 @@
+D:\Soft\ArtsBridgeRfaNetV2\ArtsBridgeRfaNetV2.InstallLog
+D:\Soft\ArtsBridgeRfaNetV2\ArtsBridgeRfaNetV2.InstallState
+D:\Soft\MmsrSimulatorForPREPROD\RunFileCopier.bat
+D:\Soft\MmsrSimulatorForPREPROD\RunMmsrFileScanner.bat
+D:\Soft\ProductCreatorService\ProductCreatorService.exe.config

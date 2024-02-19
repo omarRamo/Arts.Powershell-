@@ -1,0 +1,79 @@
+C:\inetpub\history\CFGHISTORY_0000000071\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000000072\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000000073\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000000074\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000000075\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000000076\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000000077\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000000078\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000000079\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000000080\applicationHost.config
+C:\inetpub\logs\wmsvc\W3SVC1\ex170227.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170301.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170302.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170303.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170309.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170313.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170314.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170315.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170316.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170317.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170323.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170428.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex170504.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex180822.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex180823.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex180905.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex181114.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex210603.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex210607.log
+C:\inetpub\logs\wmsvc\W3SVC1\ex210609.log
+C:\inetpub\temp\appPools\APC18E2.tmp
+C:\inetpub\temp\appPools\APC1DC4.tmp
+C:\inetpub\temp\appPools\APC26DC.tmp
+C:\inetpub\temp\appPools\APC31B9.tmp
+C:\inetpub\temp\appPools\APC3860.tmp
+C:\inetpub\temp\appPools\APC4A95.tmp
+C:\inetpub\temp\appPools\APC4E88.tmp
+C:\inetpub\temp\appPools\APC6382.tmp
+C:\inetpub\temp\appPools\APC721F.tmp
+C:\inetpub\temp\appPools\APC9209.tmp
+C:\inetpub\temp\appPools\APCB1B7.tmp
+C:\inetpub\temp\appPools\APCC00A.tmp
+C:\inetpub\temp\appPools\APCE5BC.tmp
+C:\Program Files\Altiris\Altiris Agent\AeXLastBasicInventory.xml
+C:\Program Files\Altiris\Altiris Agent\AeXUserMonitorLog.xml
+C:\Program Files\Altiris\Altiris Agent\Agents\SoftwareManagement\data\SoftwareCache_v2.xml
+C:\Program Files\Altiris\Altiris Agent\Agents\SoftwareManagement\Software Delivery\AeXSWDPolicy.xml
+C:\Program Files\Altiris\Altiris Agent\Client Policies\emnspa04.emea.cib.cm.svc_arts.xml
+C:\Program Files\Altiris\Altiris Agent\Queue\emnspa04.emea.cib\NSE-F9B-000000C5-0000071F.tmp
+C:\Program Files\Altiris\Altiris Agent\Queue\emnspa04.emea.cib\NSE-F9B-000000C5-00000746.tmp
+C:\Program Files\Altiris\Altiris Agent\Queue\emnspa04.emea.cib\NSE-FFE-000000C5-00000728.tmp
+C:\Program Files\Altiris\Altiris Agent\Queue\emnspa04.emea.cib\NSE-FFE-000000C5-00000752.tmp
+C:\Program Files (x86)\NuGet\Config\NuGet.Config
+C:\Users\svc_arts\.npmrc
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000001.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000002.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000003.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000004.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000005.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000006.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000007.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000008.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000009.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000010.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000011.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000012.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000013.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000014.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000015.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000016.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000017.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000018.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000019.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000020.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000021.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000022.xml
+C:\Users\svc_arts\Documents\IISExpress\TraceLogFiles\Cpl.Blotter.Api.IIS\fr000023.xml
+C:\Users\UT2MSZ_SO\.npmrc
+D:\INETPUB\ARTS-INT\ArtsBatchServicesEngine\Web.config

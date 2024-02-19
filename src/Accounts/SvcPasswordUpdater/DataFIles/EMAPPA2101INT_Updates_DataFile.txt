@@ -1,0 +1,3 @@
+D:\Soft\ArtsProductCreator\ProductCreatorService.exe.config
+D:\Soft\ArtsProductCreator\ProductCreatorService.InstallState
+D:\Temp\SuperDerivativesContributionApi\SuperDerivativesContributionApi\Properties\PublishProfiles\Dev.pubxml

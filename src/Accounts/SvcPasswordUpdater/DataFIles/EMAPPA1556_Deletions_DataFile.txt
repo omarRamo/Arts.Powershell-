@@ -1,0 +1,14 @@
+C:\Program Files (x86)\Calyon\RCTServiceWindows\RCTServiceWindows.exe.config
+C:\Users\svc_arts\Documents\Web.config
+C:\Program Files\DebugDiag\Logs\Misc\w3wp.exe__WebArts__PID__14248__Date__05_20_2021__Time_11_28_36AM__5__Manual Dump.dmp
+C:\Program Files\DebugDiag\Logs\Misc\w3wp.exe__WebArts__PID__14248__Date__05_20_2021__Time_11_26_21AM__3__Manual Dump.dmp
+C:\Program Files\DebugDiag\Logs\Misc\w3wp.exe__WebArts__PID__14248__Date__05_20_2021__Time_10_54_17AM__196__Manual Dump.dmp
+C:\Program Files\DebugDiag\Logs\Misc\w3wp.exe__WebArts__PID__14248__Date__05_20_2021__Time_10_51_32AM__23__Manual Dump.dmp
+C:\Program Files\DebugDiag\Logs\Misc\w3wp.exe__WebArts__PID__12620__Date__05_28_2021__Time_08_44_52AM__104__Manual Dump.dmp
+C:\Program Files\DebugDiag\Logs\Misc\w3wp.exe__WebArts__PID__12620__Date__05_28_2021__Time_08_43_41AM__385__Manual Dump.dmp
+C:\Program Files\DebugDiag\Logs\Misc\w3wp.exe__WebArts__PID__12620__Date__05_28_2021__Time_08_42_53AM__759__Manual Dump.dmp
+C:\Program Files\DebugDiag\Logs\Misc\w3wp.exe__WebArts__PID__10116__Date__07_21_2020__Time_07_39_11AM__170__Manual Dump.dmp
+C:\Program Files\DebugDiag\Logs\HTTP Response Rule 1\w3wp.exe__ContributionMedia__PID__10460__Date__06_26_2020__Time_06_01_55PM__286__HTTPRESPONSE_RULE1.dmp
+D:\INETPUB\ARTS\backup\contribIndicesApi\
+D:\INETPUB\ARTS\backup\WebArts_20220401\
+D:\INETPUB\Reporting\

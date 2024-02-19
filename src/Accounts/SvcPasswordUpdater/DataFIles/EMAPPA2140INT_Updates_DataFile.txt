@@ -1,0 +1,45 @@
+D:\INETPUB\ARTS\ArtsBatchServicesEngine\bin\Web.config
+D:\INETPUB\ARTS\ContribEngine\Web.config
+D:\INETPUB\ARTS\contribIndicesApi\Web.config
+D:\INETPUB\ARTS\WebArts\Web.config
+D:\INETPUB\ARTS-Https\ContribEngine\Web.config
+D:\INETPUB\ARTS-Https\WebArts\Web.config
+D:\INETPUB\joli\Views\Install\CasaService.cshtml
+D:\INETPUB\REPORTING\Web.config
+C:\inetpub\history\CFGHISTORY_0000001799\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000001800\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000001801\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000001802\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000001804\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000001805\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000001806\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000001807\applicationHost.config
+C:\inetpub\history\CFGHISTORY_0000001808\applicationHost.config
+C:\inetpub\temp\appPools\APC20B2.tmp
+C:\inetpub\temp\appPools\APC268C.tmp
+C:\inetpub\temp\appPools\APC2D3B.tmp
+C:\inetpub\temp\appPools\APC3D0C.tmp
+C:\inetpub\temp\appPools\APC4083.tmp
+C:\inetpub\temp\appPools\APC5544.tmp
+C:\inetpub\temp\appPools\APC70F3.tmp
+C:\inetpub\temp\appPools\APC88BE.tmp
+C:\inetpub\temp\appPools\APC8A97.tmp
+C:\inetpub\temp\appPools\APC8ED1.tmp
+C:\inetpub\temp\appPools\APC9C8B.tmp
+C:\inetpub\temp\appPools\APC9CF9.tmp
+C:\inetpub\temp\appPools\APCAAC1.tmp
+C:\inetpub\temp\appPools\APCAE44.tmp
+C:\inetpub\temp\appPools\APCC350.tmp
+C:\inetpub\temp\appPools\APCD1EB.tmp
+C:\inetpub\temp\appPools\APCDBF8.tmp
+C:\inetpub\temp\appPools\APCE1DD.tmp
+C:\inetpub\temp\appPools\APCE878.tmp
+C:\inetpub\temp\appPools\APCFB68.tmp
+C:\MmsrSimulatorForINT\RunFileCopier.bat
+C:\MmsrSimulatorForINT\RunMmsrFileScanner.bat
+C:\Program Files\Altiris\Altiris Agent\Agents\SoftwareManagement\data\SoftwareCache.xml
+C:\Program Files\Altiris\Altiris Agent\Agents\SoftwareManagement\data\SoftwareCache_v2.xml
+C:\Program Files\Altiris\Altiris Agent\Agents\SoftwareManagement\Software Delivery\AeXSWDPolicy.xml
+C:\Program Files\Altiris\Altiris Agent\Client Policies\emnspa04.emea.cib.cm.svc_arts.xml
+C:\Program Files\Altiris\Altiris Agent\AeXLastBasicInventory.xml
+C:\Program Files (x86)\Calyon\RCTServiceWindows\RCTServiceWindows.exe.config
