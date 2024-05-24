@@ -103,7 +103,7 @@ function Send-WindowsServiceApp {
 		Write-Host "Service installation started."
 		cd $($args[1])
 		
-		& .\$ExeFileName install
+		& .\$($args[2]) install
 	
 		Write-Host "Service installation finished."
 		
@@ -111,7 +111,7 @@ function Send-WindowsServiceApp {
 		
 		Write-Host "Service started."
 	
-	} -ArgumentList ($ServiceName, $DestinationFolderPath)
+	} -ArgumentList ($ServiceName, $DestinationFolderPath, $ExeFileName)
 	
 	Remove-PSSession $UserSession
 }
