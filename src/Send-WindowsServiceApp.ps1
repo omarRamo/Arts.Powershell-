@@ -66,7 +66,7 @@ function Send-WindowsServiceApp {
 	
 		Write-Host "Kill Process " $($args[0]) " finished"
 	
-	} -ArgumentList ($ServiceProcess)
+	} -ArgumentList ($ApplicationName)
 	
 	# wait 10 seconds
 	sleep -Milliseconds 10000
