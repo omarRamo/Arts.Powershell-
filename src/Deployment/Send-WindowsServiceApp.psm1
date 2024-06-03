@@ -43,32 +43,24 @@ function Send-WindowsServiceApp {
 	# Stop and kill service
 	Invoke-Command -Session $Session -ScriptBlock {
 		if (Get-Service $Using:ServiceName -ErrorAction SilentlyContinue) {
-			Write-Host "Stopping service '$Using:ServiceName'" -NoNewline
+			Write-Host "Stopping service '$Using:ServiceName'... " -NoNewline
 			Get-Service -ServiceName $Using:ServiceName | Stop-Service
-			Write-Host "Stopped!"
-		} else {
-			if ($Using:ServiceType -eq "Native") {
-				Write-Host "No service exists, creating service '$Using:ServiceName'"
-				sc.exe create $Using:ServiceName binPath=$Using:ExecutableFilePath
-				Write-Host "Service created"
+			if (Get-Process -Name $Using:ProjectName -ErrorAction SilentlyContinue) {
+				Write-Host "Stopping process ... " -NoNewline
+				Wait-Process -Name $Using:ProjectName
+				Write-Host "Process stopped"
 			}
-		}
-		if (Get-Process $Using:ExecutableFile -ErrorAction SilentlyContinue) {
-			Write-Host "Killing process '$Using:ExecutableFile'... " -NoNewline
-			Get-Process $Using:ExecutableFile -ErrorAction SilentlyContinue | Stop-Process -PassThru -Force
-			Write-Host "Killed!"
+			Write-Host "Stopped!"
 		}
 	}
 	
-	Start-Sleep -Milliseconds 10000 # wait 10 seconds
 	Copy-FilesToRemoteSession -Session $Session -SourcePath .\$ProjectName\bin\$Environment -RemotePath $DestinationFolderPath
 	
-	Write-Host "Installing and starting service... "
-
 	# Install and start service
 	switch ($ServiceType) {
 		"Topshelf" {
 			Invoke-Command -Session $Session -ScriptBlock {
+				Write-Host "Installing and starting service... " -NoNewline
 				cd $Using:DestinationFolderPath 
 				& .\$($Using:ExecutableFile) install
 				Start-Service -Name $Using:ServiceName
@@ -77,6 +69,12 @@ function Send-WindowsServiceApp {
 		}
 		"Native" {
 			Invoke-Command -Session $Session -ScriptBlock {
+				if (!(Get-Service $Using:ServiceName -ErrorAction SilentlyContinue)) {
+					Write-Host "No service exists, creating service '$Using:ServiceName'... " -NoNewline
+					sc.exe create $Using:ServiceName binPath=$Using:ExecutableFilePath
+					Write-Host "Service created"
+				}
+				Write-Host "Installing and starting service... " -NoNewline
 				Start-Service -Name $Using:ServiceName
 				Write-Host "Installed and started !"
 			}
