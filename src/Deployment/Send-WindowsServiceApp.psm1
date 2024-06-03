@@ -26,12 +26,18 @@ function Send-WindowsServiceApp {
 		# Windows service Name
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
-		[string] $ServiceName
+		[string] $ServiceName,
+		# Type of service deployed. If it's native, we need to create a service using sc.exe
+		[Parameter(Mandatory = $true)]
+		[ValidateNotNullOrEmpty()]
+		[ValidateSet("Topshelf", "Native")]
+		[string] $ServiceType
 	)
 	Write-Host "DEPLOYMENT STARTED"
 	
 	$DestinationFolderPath = "D:\APPLICATIONS\$ProjectName\"
 	$ExecutableFile = "$ProjectName.exe"
+	$ExecutableFilePath = Join-Path $DestinationFolderPath $ExecutableFile
 	$Session = Get-RemoteSession -Environment $Environment -Account $Account -Password $Password -Type "Console"
 
 	# Stop and kill service
@@ -40,6 +46,12 @@ function Send-WindowsServiceApp {
 			Write-Host "Stopping service '$Using:ServiceName'" -NoNewline
 			Get-Service -ServiceName $Using:ServiceName | Stop-Service
 			Write-Host "Stopped!"
+		} else {
+			if ($Using:ServiceType -eq "Native") {
+				Write-Host "No service exists, creating service '$Using:ServiceName'"
+				sc.exe create $Using:ServiceName binPath=$Using:ExecutableFilePath
+				Write-Host "Service created"
+			}
 		}
 		if (Get-Process $Using:ExecutableFile -ErrorAction SilentlyContinue) {
 			Write-Host "Killing process '$Using:ExecutableFile'... " -NoNewline
@@ -51,11 +63,23 @@ function Send-WindowsServiceApp {
 	Start-Sleep -Milliseconds 10000 # wait 10 seconds
 	Copy-FilesToRemoteSession -Session $Session -SourcePath .\$ProjectName\bin\$Environment -RemotePath $DestinationFolderPath
 	
+	Write-Host "Installing and starting service... "
+
 	# Install and start service
-	Invoke-Command -Session $Session -ScriptBlock {
-		Write-Host "Installing and starting service... " -NoNewline
-		& (Join-Path $Using:DestinationFolderPath $Using:ExecutableFile) install
-		Start-Service -Name $Using:ServiceName
-		Write-Host "Installed and started !"
+	switch ($ServiceType) {
+		"Topshelf" {
+			Invoke-Command -Session $Session -ScriptBlock {
+				cd $Using:DestinationFolderPath 
+				& .\$($Using:ExecutableFile) install
+				Start-Service -Name $Using:ServiceName
+				Write-Host "Installed and started !"
+			}
+		}
+		"Native" {
+			Invoke-Command -Session $Session -ScriptBlock {
+				Start-Service -Name $Using:ServiceName
+				Write-Host "Installed and started !"
+			}
+		}
 	}
 }
