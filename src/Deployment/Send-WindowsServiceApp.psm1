@@ -23,15 +23,15 @@ function Send-WindowsServiceApp {
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string] $ProjectName,
-		# Windows service Name
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string] $ServiceName,
 		# Type of service deployed. If it's native, we need to create a service using sc.exe
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet("Topshelf", "Native")]
-		[string] $ServiceType
+		[string] $ServiceType,
+		# Custom service name
+		[Parameter(Mandatory = $false)]
+		[ValidateNotNullOrEmpty()]
+		[string] $ServiceName
 	)
 	Write-Host "DEPLOYMENT STARTED"
 	
@@ -42,33 +42,27 @@ function Send-WindowsServiceApp {
 
 	# Stop and kill service
 	Invoke-Command -Session $Session -ScriptBlock {
-		if (Get-Service $Using:ServiceName -ErrorAction SilentlyContinue) {
+		$Service = Get-Service $Using:ServiceName -ErrorAction SilentlyContinue
+		if ($Service) {
 			Write-Host "Stopping service '$Using:ServiceName'... " -NoNewline
 			Get-Service -ServiceName $Using:ServiceName | Stop-Service
-			if (Get-Process -Name $Using:ProjectName -ErrorAction SilentlyContinue) {
-				Write-Host "Stopping process ... " -NoNewline
-				Wait-Process -Name $Using:ProjectName
-				Write-Host "Process stopped"
-			}
+			$Service.WaitForStatus('Stopped')
 			Write-Host "Stopped!"
 		}
 	}
-	
 	Copy-FilesToRemoteSession -Session $Session -SourcePath .\$ProjectName\bin\$Environment -RemotePath $DestinationFolderPath
 	
 	# Install and start service
-	switch ($ServiceType) {
-		"Topshelf" {
-			Invoke-Command -Session $Session -ScriptBlock {
+	Invoke-Command -Session $Session -ScriptBlock {
+		switch ($ServiceType) {
+			"Topshelf" {
 				Write-Host "Installing and starting service... " -NoNewline
-				cd $Using:DestinationFolderPath 
+				Set-Location $Using:DestinationFolderPath 
 				& .\$($Using:ExecutableFile) install
 				Start-Service -Name $Using:ServiceName
 				Write-Host "Installed and started !"
 			}
-		}
-		"Native" {
-			Invoke-Command -Session $Session -ScriptBlock {
+			"Native" {
 				if (!(Get-Service $Using:ServiceName -ErrorAction SilentlyContinue)) {
 					Write-Host "No service exists, creating service '$Using:ServiceName'... " -NoNewline
 					sc.exe create $Using:ServiceName binPath=$Using:ExecutableFilePath
@@ -80,4 +74,5 @@ function Send-WindowsServiceApp {
 			}
 		}
 	}
+	Write-Host "DEPLOYMENT FINISHED"
 }

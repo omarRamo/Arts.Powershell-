@@ -29,7 +29,7 @@ function Send-ConsoleApp {
     Write-Host "DEPLOYMENT STARTED"
 
     $Session = Get-RemoteSession $Environment $Account $Password -Type "Console"
-    Copy-AppToRemoteSession -Session $Session -SourcePath .\$ProjectName\bin\$Environment\* -RemotePath "D:/APPLICATIONS/$ProjectName"
+    Copy-FilesToRemoteSession -Session $Session -SourcePath .\$ProjectName\bin\$Environment\* -RemotePath "D:/APPLICATIONS/$ProjectName"
     Remove-PSSession $Session
 
     Write-Host "DEPLOYMENT FINISHED"

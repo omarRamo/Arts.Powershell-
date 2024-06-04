@@ -31,6 +31,6 @@ function Send-AngularApp {
     # Build solution
     npm run build -- --configuration $Environment
 
-    Copy-AppToRemoteSession -Session $Session -SourcePath ".\dist\*" -RemotePath "D:/INETPUB/ARTS/$ProjectName"
+    Copy-FilesToRemoteSession -Session $Session -SourcePath ".\dist\*" -RemotePath "D:/INETPUB/ARTS/$ProjectName"
     Write-Host "DEPLOYMENT FINISHED"
 }
