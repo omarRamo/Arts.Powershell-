@@ -31,15 +31,7 @@ function Send-WindowsServiceApp {
 		# Custom service name
 		[Parameter(Mandatory = $false)]
 		[ValidateNotNullOrEmpty()]
-		[string] $ServiceName,
-		# Username of svc_arts. Used to create a service with svc_arts user rights
-		[Parameter(Mandatory = $false)]
-		[ValidateNotNullOrEmpty()]
-		[string] $SvcArtsUsername,
-		# Password of svc_arts
-		[Parameter(Mandatory = $false)]
-		[ValidateNotNullOrEmpty()]
-		[string] $SvcArtsPassword
+		[string] $ServiceName
 	)
 	Write-Host "DEPLOYMENT STARTED"
 	
@@ -54,7 +46,7 @@ function Send-WindowsServiceApp {
 	$ExecutableFile = "$ProjectName.exe"
 	$ExecutableFilePath = Join-Path $DestinationFolderPath $ExecutableFile
 	$Session = Get-RemoteSession -Environment $Environment -Account $Account -Password $Password -Type "Console"
-	$SvcArtsCredential = New-Object System.Management.Automation.PSCredential($SvcArtsUsername, (ConvertTo-SecureString $SvcArtsPassword -AsPlainText -Force))
+	$SvcArtsCredential = New-Object System.Management.Automation.PSCredential($env:SVC_ARTS_USERNAME, (ConvertTo-SecureString $env:SVC_ARTS_PASSWORD -AsPlainText -Force))
 
 	# Stop and kill service
 	Invoke-Command -Session $Session -ScriptBlock {
