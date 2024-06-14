@@ -23,7 +23,7 @@ function Send-WindowsServiceApp {
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string] $ProjectName,
-		# Type of service deployed. If it's native, we need to create a service using sc.exe
+		# Type of service deployed. If it's native, we need to create a service manually using New-Service
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet("Topshelf", "Native")]
@@ -31,14 +31,30 @@ function Send-WindowsServiceApp {
 		# Custom service name
 		[Parameter(Mandatory = $false)]
 		[ValidateNotNullOrEmpty()]
-		[string] $ServiceName
+		[string] $ServiceName,
+		# Username of svc_arts. Used to create a service with svc_arts user rights
+		[Parameter(Mandatory = $false)]
+		[ValidateNotNullOrEmpty()]
+		[string] $SvcArtsUsername,
+		# Password of svc_arts
+		[Parameter(Mandatory = $false)]
+		[ValidateNotNullOrEmpty()]
+		[string] $SvcArtsPassword
 	)
 	Write-Host "DEPLOYMENT STARTED"
 	
-	$DestinationFolderPath = "D:\APPLICATIONS\$ProjectName\"
+	$DestinationFolderPath = "D:\SOFT\$ProjectName\"
+	$SourcePath = (Resolve-Path ".\$ProjectName\bin\*\$Environment" -ErrorAction SilentlyContinue)
+	if ($SourcePath.Length -ne 1) {
+		$SourcePath = ".\$ProjectName\bin\$Environment"
+	} 
+	else {
+		$SourcePath = $SourcePath.Path
+	}
 	$ExecutableFile = "$ProjectName.exe"
 	$ExecutableFilePath = Join-Path $DestinationFolderPath $ExecutableFile
 	$Session = Get-RemoteSession -Environment $Environment -Account $Account -Password $Password -Type "Console"
+	$SvcArtsCredential = New-Object System.Management.Automation.PSCredential($SvcArtsUsername, (ConvertTo-SecureString $SvcArtsPassword -AsPlainText -Force))
 
 	# Stop and kill service
 	Invoke-Command -Session $Session -ScriptBlock {
@@ -50,11 +66,11 @@ function Send-WindowsServiceApp {
 			Write-Host "Stopped!"
 		}
 	}
-	Copy-FilesToRemoteSession -Session $Session -SourcePath .\$ProjectName\bin\$Environment -RemotePath $DestinationFolderPath
+	Copy-FilesToRemoteSession -Session $Session -SourcePath $SourcePath -RemotePath $DestinationFolderPath
 	
 	# Install and start service
 	Invoke-Command -Session $Session -ScriptBlock {
-		switch ($ServiceType) {
+		switch ($Using:ServiceType) {
 			"Topshelf" {
 				Write-Host "Installing and starting service... " -NoNewline
 				Set-Location $Using:DestinationFolderPath 
@@ -65,7 +81,7 @@ function Send-WindowsServiceApp {
 			"Native" {
 				if (!(Get-Service $Using:ServiceName -ErrorAction SilentlyContinue)) {
 					Write-Host "No service exists, creating service '$Using:ServiceName'... " -NoNewline
-					sc.exe create $Using:ServiceName binPath=$Using:ExecutableFilePath
+					New-Service -Name $Using:ServiceName -BinaryPathName $Using:ExecutableFilePath -Credential $Using:SvcArtsCredential
 					Write-Host "Service created"
 				}
 				Write-Host "Installing and starting service... " -NoNewline
