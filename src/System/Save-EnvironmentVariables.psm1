@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Save filtered environment variables from machine to file
+    Save filtered environment variables from computer to file
 #>
 function Save-EnvironmentVariables {
     param(
@@ -13,29 +13,40 @@ function Save-EnvironmentVariables {
         [ValidateNotNullOrEmpty()]
         [string] $Contains
     )
+    $ErrorActionPreference = "Stop"
     $FullPath = Join-Path $Path "EncryptedEnvVars_$(hostname).json"
     $EnvTypes = @("User", "Machine")
-    $FileContent = @{}
+    $FileContent = New-Object System.Collections.Generic.List[Object]
     $Key = New-Object Byte[] 16
     [Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($Key)
 
     foreach ($EnvType in $EnvTypes) {
         $EnvVars = [Environment]::GetEnvironmentVariables($EnvType)
-        $FileContent | Add-Member -Name $EnvType -Value (New-Object System.Collections.Generic.List[Object]) -MemberType NoteProperty
+        $FileContentEnvVars = New-Object System.Collections.Generic.List[Object]
 
         foreach ($EnvVarName in $EnvVars.Keys) {
-            $EnvVarValue = $EnvVars[$EnvVarName]
 
-            # Filter env variables having value
-            if ($EnvVarValue -and $EnvVarName -like "*$Contains*") {
+            # Filter env variables having value and name match pattern
+            if ($EnvVars[$EnvVarName] -and $EnvVarName -like "*$Contains*") {
                 $EncryptedEnvVarValue = $EnvVars[$EnvVarName] | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString -key $Key
-                $FileContent.$EnvType.Add([PSCustomObject]@{$EnvVarName = $EncryptedEnvVarValue })
+                $FileContentEnvVars.Add([PSCustomObject]@{
+                        "Name"           = $EnvVarName
+                        "EncryptedValue" = $EncryptedEnvVarValue 
+                    })
+            }
+
+            # Add Environment variables to file content
+            if ($FileContentEnvVars.Count -gt 0) {
+                $FileContent.Add([PSCustomObject]@{
+                        "Name"      = $EnvType 
+                        "Variables" = $FileContentEnvVars
+                    })
             }
         }
     }
 
-    $FileContent | ConvertTo-Json | Out-File $FullPath -ErrorAction Stop
-    Write-Host "File successfuly saved into '$FullPath'" -ForegroundColor Green
+    $FileContent | ConvertTo-Json -Depth 3 | Out-File $FullPath
+    Write-Host "Computer's environment variables have been successfuly saved into '$FullPath'" -ForegroundColor Green
     Write-Host "To decrypt the file, use the following 16 bits key:"
     Write-Host
     Write-Host "($($Key -join ", "))"
