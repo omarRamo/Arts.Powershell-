@@ -35,7 +35,7 @@ function Send-WindowsServiceApp {
 	)
 	Write-Host "DEPLOYMENT STARTED"
 	
-	$DestinationFolderPath = "D:\APPLICATIONS\$ProjectName\"
+	$DestinationFolderPath = "D:\SOFT\$ProjectName\"
 	$ExecutableFile = "$ProjectName.exe"
 	$ExecutableFilePath = Join-Path $DestinationFolderPath $ExecutableFile
 	$Session = Get-RemoteSession -Environment $Environment -Account $Account -Password $Password -Type "Console"
@@ -54,18 +54,18 @@ function Send-WindowsServiceApp {
 	
 	# Install and start service
 	Invoke-Command -Session $Session -ScriptBlock {
-		switch ($ServiceType) {
+		switch ($Using:ServiceType) {
 			"Topshelf" {
 				Write-Host "Installing and starting service... " -NoNewline
 				Set-Location $Using:DestinationFolderPath 
-				& .\$($Using:ExecutableFile) install
+				& .\$($Using:ExecutableFile) install -username $SvcArtsUsername -password ""$SvcArtsPassword""
 				Start-Service -Name $Using:ServiceName
 				Write-Host "Installed and started !"
 			}
 			"Native" {
 				if (!(Get-Service $Using:ServiceName -ErrorAction SilentlyContinue)) {
 					Write-Host "No service exists, creating service '$Using:ServiceName'... " -NoNewline
-					sc.exe create $Using:ServiceName binPath=$Using:ExecutableFilePath
+					New-Service -Name $Using:ServiceName -BinaryPathName $Using:ExecutableFilePath -Credential $SvcArtsCredential
 					Write-Host "Service created"
 				}
 				Write-Host "Installing and starting service... " -NoNewline
