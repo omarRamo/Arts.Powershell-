@@ -42,6 +42,8 @@ function Send-WindowsServiceApp {
 
 	# Stop and kill service
 	Invoke-Command -Session $Session -ScriptBlock {
+		$SvcArtsUsername = [Environment]::GetEnvironmentVariable("Credentials.Svc.Username", "Machine")
+		$SvcArtsPassword = [Environment]::GetEnvironmentVariable("Credentials.Svc.Password", "Machine")
 		$Service = Get-Service $Using:ServiceName -ErrorAction SilentlyContinue
 		if ($Service) {
 			Write-Host "Stopping service '$Using:ServiceName'... " -NoNewline
