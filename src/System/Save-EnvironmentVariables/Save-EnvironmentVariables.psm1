@@ -35,13 +35,14 @@ function Save-EnvironmentVariables {
                     })
             }
 
-            # Add Environment variables to file content
-            if ($FileContentEnvVars.Count -gt 0) {
-                $FileContent.Add([PSCustomObject]@{
-                        "Name"      = $EnvType 
-                        "Variables" = $FileContentEnvVars
-                    })
-            }
+        }
+        
+        # Add Environment variables to file content
+        if ($FileContentEnvVars.Count -gt 0) {
+            $FileContent.Add([PSCustomObject]@{
+                    "Name"      = $EnvType 
+                    "Variables" = $FileContentEnvVars
+                })
         }
     }
 
