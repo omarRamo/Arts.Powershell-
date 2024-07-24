@@ -11,14 +11,20 @@ function Save-EnvironmentVariables {
         # Filter environment variable names containing the pattern
         [Parameter(Mandatory = $False)]
         [ValidateNotNullOrEmpty()]
-        [string] $Contains
+        [string] $Contains,
+        # Symetric key
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [Byte[]] $Key
     )
     $ErrorActionPreference = "Stop"
     $FullPath = Join-Path $Path "EncryptedEnvVars_$(hostname).json"
     $EnvTypes = @("User", "Machine")
     $FileContent = New-Object System.Collections.Generic.List[Object]
-    $Key = New-Object Byte[] 16
-    [Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($Key)
+    if (-not $Key) {
+        $Key = New-Object Byte[] 16
+        [Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($Key)
+    }
 
     foreach ($EnvType in $EnvTypes) {
         $EnvVars = [Environment]::GetEnvironmentVariables($EnvType)

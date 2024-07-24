@@ -8,7 +8,7 @@ function Restore-EnvironmentVariables {
         [Parameter(Mandatory = $True)]
         [ValidateNotNullOrEmpty()]
         [string] $Path,
-        # Filter environment variable names containing the pattern
+        # Symetric key
         [Parameter(Mandatory = $True)]
         [ValidateNotNullOrEmpty()]
         [Byte[]] $Key
