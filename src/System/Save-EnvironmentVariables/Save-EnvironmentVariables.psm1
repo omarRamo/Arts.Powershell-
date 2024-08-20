@@ -32,6 +32,11 @@ function Save-EnvironmentVariables {
 
         foreach ($EnvVarName in $EnvVars.Keys) {
 
+            # Filter out user specific variables
+            if ($EnvVarName == "PATH" -or $EnvVarName == "TEMP" -or $EnvVarName == "TMP") {
+                continue
+            }
+
             # Filter env variables having value and name match pattern
             if ($EnvVars[$EnvVarName] -and $EnvVarName -like "*$Contains*") {
                 $EncryptedEnvVarValue = $EnvVars[$EnvVarName] | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString -key $Key
