@@ -29,7 +29,7 @@ function Invoke-SqlScripts {
         $logMessage = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
         try {
             $logMessage += " Executing script '$file'... "
-            Invoke-Sqlcmd -ConnectionString $ConnectionString -InputFile $file.FullName
+            Invoke-Sqlcmd -ConnectionString $ConnectionString -InputFile $file.FullName -ErrorAction Stop
             $logMessage += "Done!"
         } catch {
             $logMessage += "Cannot be executed for the following reason: $($_.Exception.Message)"
