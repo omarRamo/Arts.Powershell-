@@ -13,6 +13,10 @@ function Send-ConsoleApp {
         [ValidateNotNullOrEmpty()]
         # Environment name
         [string] $Environment,
+        # Name of the configuration build
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string] $BuildConfiguration,
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         # Project name
@@ -21,15 +25,19 @@ function Send-ConsoleApp {
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string] $Account,
+        # Password of the user executing the pipeline
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        # Password of the user executing the pipeline
         [string] $Password
     )
     Write-Host "DEPLOYMENT STARTED"
 
+    if(-not $BuildConfiguration) {
+        $BuildConfiguration = $Environment
+    }
+
     $Session = Get-RemoteSession $Environment $Account $Password -Type "Console"
-    Copy-FilesToRemoteSession -Session $Session -SourcePath .\$ProjectName\bin\$Environment -RemotePath "D:/SOFT/$ProjectName"
+    Copy-FilesToRemoteSession -Session $Session -SourcePath .\$ProjectName\bin\$BuildConfiguration -RemotePath "D:/SOFT/$ProjectName"
     Remove-PSSession $Session
 
     Write-Host "DEPLOYMENT FINISHED"

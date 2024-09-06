@@ -51,7 +51,7 @@
     # ProcessorArchitecture = ''
 
     # Modules qui doivent être importés dans l'environnement global préalablement à l'importation de ce module
-    RequiredModules = @("sqlserver")
+    # RequiredModules = @()
 
     # Assemblys qui doivent être chargés préalablement à l'importation de ce module
     # RequiredAssemblies = @()
