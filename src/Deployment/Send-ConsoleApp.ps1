@@ -36,9 +36,12 @@ function Send-ConsoleApp {
         $BuildConfiguration = $Environment
     }
 
-    $Session = Get-RemoteSession $Environment $Account $Password -Type "Console"
-    Copy-FilesToRemoteSession -Session $Session -SourcePath .\$ProjectName\bin\$BuildConfiguration -RemotePath "D:/SOFT/$ProjectName"
-    Remove-PSSession $Session
+    $sessions = Get-RemoteSessions $Environment $Account $Password -Type "Console"
+
+    foreach ($session in $sessions) {
+        Copy-FilesToRemoteSession -Session $session -SourcePath .\$ProjectName\bin\$BuildConfiguration -RemotePath "D:/SOFT/$ProjectName"
+        Remove-PSSession $session
+    }
 
     Write-Host "DEPLOYMENT FINISHED"
 }

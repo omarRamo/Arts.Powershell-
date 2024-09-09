@@ -21,8 +21,6 @@ function Send-AngularApp {
         [string] $NvmVersion
     )
     Write-Host "DEPLOYMENT STARTED"
-
-    $Session = Get-RemoteSession $Environment $Account $Password -Type "Web"
     
     # Installing Node JS using Node Version Manager (NVM)
     nvm install $NvmVersion
@@ -30,12 +28,12 @@ function Send-AngularApp {
     npm install
     # Build solution
     npm run build -- --configuration $Environment
-
-    Copy-FilesToRemoteSession -Session $Session -SourcePath ".\dist" -RemotePath "D:/INETPUB/ARTS/$ProjectName"
-
-    if ($Environment -eq "Preproduction") {
-        $Session2 = Get-RemoteSession PreproductionWeb2 $Account $Password -Type "Web"
-        Copy-FilesToRemoteSession -Session $Session2 -SourcePath ".\dist" -RemotePath "D:/INETPUB/ARTS/$ProjectName"
+    
+    $sessions = Get-RemoteSessions $Environment $Account $Password -Type "Web"
+    foreach($session in $sessions) {
+         Copy-FilesToRemoteSession -Session $Session -SourcePath ".\dist" -RemotePath "D:/INETPUB/ARTS/$ProjectName"
+         Remove-PSSession $session
     }
+
     Write-Host "DEPLOYMENT FINISHED"
 }
