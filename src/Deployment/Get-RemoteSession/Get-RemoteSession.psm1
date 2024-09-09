@@ -27,15 +27,16 @@ function Get-RemoteSession {
         [string] $Type
     )
 
-    $Environments = @("Development", "Integration", "Preproduction", "Production")
+    $Environments = @("Development", "Integration", "Preproduction", "Production", "PreproductionWeb2")
 
     $Machinename = switch ($Type) {
         "Web" { 
             Switch ($Environment) {
                 $Environments[0] { "wdvpaap000lzzzx" }
                 $Environments[1] { "wivpaap000lzzzy" }
-                $Environments[2] { "EMAPPA2142" }
+                $Environments[2] { "wqvpaap000nzzz2" }
                 $Environments[3] { "EMAPPA2143" }
+                $Environment[4] { "wqvpaap000nzzz3" }
             }
         }
         "Console" { 
