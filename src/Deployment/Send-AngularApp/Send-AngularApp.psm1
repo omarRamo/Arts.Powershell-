@@ -32,5 +32,10 @@ function Send-AngularApp {
     npm run build -- --configuration $Environment
 
     Copy-FilesToRemoteSession -Session $Session -SourcePath ".\dist" -RemotePath "D:/INETPUB/ARTS/$ProjectName"
+
+    if ($Environment -eq "Preproduction") {
+        $Session2 = Get-RemoteSession PreproductionWeb2 $Account $Password -Type "Web"
+        Copy-FilesToRemoteSession -Session $Session2 -SourcePath ".\dist" -RemotePath "D:/INETPUB/ARTS/$ProjectName"
+    }
     Write-Host "DEPLOYMENT FINISHED"
 }
