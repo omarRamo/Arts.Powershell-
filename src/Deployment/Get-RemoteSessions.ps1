@@ -27,9 +27,9 @@ function Get-RemoteSessions {
         [string] $Type
     )
 
-    $Environments = @("Development", "Integration", "Preproduction", "Production")
+    $environments = @("Development", "Integration", "Preproduction", "Production")
 
-    $Machinenames = switch ($Type) {
+    $machinesNames = switch ($Type) {
         "Web" { 
             Switch ($Environment) {
                 $Environments[0] { @("wdvpaap000lzzzx") }
@@ -48,15 +48,17 @@ function Get-RemoteSessions {
         }
     }
 
-    if ($null -eq $Machinenames) {
+    if ($null -eq $machinesNames) {
         Write-Error "Environment '$Environment' is not taken in account. Available : ($Environments)" -ErrorAction Stop
         exit 1
-    }
-    else {
-        Write-Host "Opening session on remote host '$MachineName'..." -NoNewline
-        $Credential = New-Object System.Management.Automation.PSCredential($Account, (ConvertTo-SecureString $Password -AsPlainText -Force))
-        $Session = New-PSSession -ComputerName $Machinename -Credential $Credential
-        Write-Host "Opened!"
-        return $Session
+    } else {
+        $sessions = @()
+        foreach($machineName in $machinesNames) {
+            Write-Host "Opening session on remote host '$machineName'..." -NoNewline
+            $Credential = New-Object System.Management.Automation.PSCredential($Account, (ConvertTo-SecureString $Password -AsPlainText -Force))
+            $sessions += New-PSSession -ComputerName $machineName -Credential $Credential
+            Write-Host "Opened!"
+        }
+        return $sessions
     }
 }

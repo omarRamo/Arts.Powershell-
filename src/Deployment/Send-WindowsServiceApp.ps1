@@ -31,14 +31,19 @@ function Send-WindowsServiceApp {
 		# Custom service name
 		[Parameter(Mandatory = $false)]
 		[ValidateNotNullOrEmpty()]
-		[string] $ServiceName
+		[string] $ServiceName,
+		# Hosting type
+		[Parameter(Mandatory = $false)]
+		[ValidateNotNullOrEmpty()]
+		[ValidateSet("Web", "Console")]
+		[string] $HostingType = "Console"
 	)
 	Write-Host "DEPLOYMENT STARTED"
 	
 	$DestinationFolderPath = "D:\SOFT\$ProjectName\"
 	$ExecutableFile = "$ProjectName.exe"
 	$ExecutableFilePath = Join-Path $DestinationFolderPath $ExecutableFile
-	$sessions = Get-RemoteSessions -Environment $Environment -Account $Account -Password $Password -Type "Console"
+	$sessions = Get-RemoteSessions -Environment $Environment -Account $Account -Password $Password -Type $HostingType
 
 	foreach($session in $sessions) {
 		# Stop and kill service
