@@ -58,7 +58,15 @@ function Send-WindowsServiceApp {
 				Write-Host "Stopped!"
 			}
 		}
-		Copy-FilesToRemoteSession -Session $session -SourcePath .\$ProjectName\bin\$Environment -RemotePath $DestinationFolderPath
+
+		$SourcePath = (Resolve-Path ".\$ProjectName\bin\*\$Environment" -ErrorAction SilentlyContinue)
+		if ($SourcePath.Length -ne 1) {
+			$SourcePath = ".\$ProjectName\bin\$Environment"
+		} 
+		else {
+			$SourcePath = $SourcePath.Path
+		}
+		Copy-FilesToRemoteSession -Session $session -SourcePath $SourcePath -RemotePath $DestinationFolderPath
 		
 		# Install and start service
 		Invoke-Command -Session $session -ScriptBlock {
