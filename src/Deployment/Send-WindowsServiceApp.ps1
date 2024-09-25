@@ -91,6 +91,7 @@ function Send-WindowsServiceApp {
 				}
 			}
 		}
+		Remove-PSSession $session
 	}
 	Write-Host "DEPLOYMENT FINISHED"
 }
