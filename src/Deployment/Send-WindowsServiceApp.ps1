@@ -80,6 +80,7 @@ function Send-WindowsServiceApp {
 				}
 				"Native" {
 					if (!(Get-Service $Using:ServiceName -ErrorAction SilentlyContinue)) {
+						$SvcArtsCredential = New-Object System.Management.Automation.PSCredential($SvcArtsUsername, (ConvertTo-SecureString $SvcArtsPassword -AsPlainText -Force))
 						Write-Host "No service exists, creating service '$Using:ServiceName'... " -NoNewline
 						New-Service -Name $Using:ServiceName -BinaryPathName $Using:ExecutableFilePath -Credential $SvcArtsCredential
 						Write-Host "Service created"
