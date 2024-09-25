@@ -48,8 +48,6 @@ function Send-WindowsServiceApp {
 	foreach($session in $sessions) {
 		# Stop and kill service
 		Invoke-Command -Session $session -ScriptBlock {
-			$SvcArtsUsername = [Environment]::GetEnvironmentVariable("Credentials.Svc.Username", "Machine")
-			$SvcArtsPassword = [Environment]::GetEnvironmentVariable("Credentials.Svc.Password", "Machine")
 			$Service = Get-Service $Using:ServiceName -ErrorAction SilentlyContinue
 			if ($Service) {
 				Write-Host "Stopping service '$Using:ServiceName'... " -NoNewline
@@ -70,6 +68,8 @@ function Send-WindowsServiceApp {
 		
 		# Install and start service
 		Invoke-Command -Session $session -ScriptBlock {
+			$SvcArtsUsername = [Environment]::GetEnvironmentVariable("Credentials.Svc.Username", "Machine")
+			$SvcArtsPassword = [Environment]::GetEnvironmentVariable("Credentials.Svc.Password", "Machine")
 			switch ($Using:ServiceType) {
 				"Topshelf" {
 					Write-Host "Installing and starting service... " -NoNewline
