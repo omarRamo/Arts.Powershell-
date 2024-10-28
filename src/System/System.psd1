@@ -12,7 +12,7 @@
     RootModule = 'System.psm1'
 
     # Numéro de version de ce module.
-    ModuleVersion     = '2.0.0'
+    ModuleVersion     = '3.0.0'
 
     # Éditions PS prises en charge
     # CompatiblePSEditions = @()
@@ -124,4 +124,3 @@
     # DefaultCommandPrefix = ''
 
 }
-
