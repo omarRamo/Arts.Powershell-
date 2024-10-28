@@ -66,7 +66,11 @@
     # FormatsToProcess = @()
 
     # Modules à importer en tant que modules imbriqués du module spécifié dans RootModule/ModuleToProcess
-    NestedModules = @("Invoke-SqlScripts.ps1", "Restore-EnvironmentVariables.ps1", "Save-EnvironmentVariables.ps1")
+    NestedModules = @(
+        "Invoke-SqlScripts.ps1", 
+        "Restore-EnvironmentVariables.ps1", 
+        "Save-EnvironmentVariables.ps1",
+        "Update-PlainTextFilesContent.ps1")
 
     # Fonctions à exporter à partir de ce module. Pour de meilleures performances, n’utilisez pas de caractères génériques et ne supprimez pas l’entrée. Utilisez un tableau vide si vous n’avez aucune fonction à exporter.
     FunctionsToExport = "*"
