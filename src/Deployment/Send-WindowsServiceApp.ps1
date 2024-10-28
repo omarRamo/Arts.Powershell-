@@ -48,8 +48,6 @@ function Send-WindowsServiceApp {
 	foreach($session in $sessions) {
 		# Stop and kill service
 		Invoke-Command -Session $session -ScriptBlock {
-			$SvcArtsUsername = [Environment]::GetEnvironmentVariable("Credentials.Svc.Username", "Machine")
-			$SvcArtsPassword = [Environment]::GetEnvironmentVariable("Credentials.Svc.Password", "Machine")
 			$Service = Get-Service $Using:ServiceName -ErrorAction SilentlyContinue
 			if ($Service) {
 				Write-Host "Stopping service '$Using:ServiceName'... " -NoNewline
@@ -58,10 +56,20 @@ function Send-WindowsServiceApp {
 				Write-Host "Stopped!"
 			}
 		}
-		Copy-FilesToRemoteSession -Session $session -SourcePath .\$ProjectName\bin\$Environment -RemotePath $DestinationFolderPath
+
+		$SourcePath = (Resolve-Path ".\$ProjectName\bin\*\$Environment" -ErrorAction SilentlyContinue)
+		if ($SourcePath.Length -ne 1) {
+			$SourcePath = ".\$ProjectName\bin\$Environment"
+		} 
+		else {
+			$SourcePath = $SourcePath.Path
+		}
+		Copy-FilesToRemoteSession -Session $session -SourcePath $SourcePath -RemotePath $DestinationFolderPath
 		
 		# Install and start service
 		Invoke-Command -Session $session -ScriptBlock {
+			$SvcArtsUsername = [Environment]::GetEnvironmentVariable("Credentials.Svc.Username", "Machine")
+			$SvcArtsPassword = [Environment]::GetEnvironmentVariable("Credentials.Svc.Password", "Machine")
 			switch ($Using:ServiceType) {
 				"Topshelf" {
 					Write-Host "Installing and starting service... " -NoNewline
@@ -72,6 +80,7 @@ function Send-WindowsServiceApp {
 				}
 				"Native" {
 					if (!(Get-Service $Using:ServiceName -ErrorAction SilentlyContinue)) {
+						$SvcArtsCredential = New-Object System.Management.Automation.PSCredential($SvcArtsUsername, (ConvertTo-SecureString $SvcArtsPassword -AsPlainText -Force))
 						Write-Host "No service exists, creating service '$Using:ServiceName'... " -NoNewline
 						New-Service -Name $Using:ServiceName -BinaryPathName $Using:ExecutableFilePath -Credential $SvcArtsCredential
 						Write-Host "Service created"
@@ -82,6 +91,7 @@ function Send-WindowsServiceApp {
 				}
 			}
 		}
+		Remove-PSSession $session
 	}
 	Write-Host "DEPLOYMENT FINISHED"
 }
