@@ -12,7 +12,7 @@
     RootModule = 'Deployment.psm1'
     
     # Numéro de version de ce module.
-    ModuleVersion = '1.1.5'
+    ModuleVersion = '1.1.6'
     
     # Éditions PS prises en charge
     # CompatiblePSEditions = @()
