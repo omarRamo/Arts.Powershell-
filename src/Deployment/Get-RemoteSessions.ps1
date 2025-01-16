@@ -43,7 +43,7 @@ function Get-RemoteSessions {
                 $Environments[0] { "wdvpaap000lzzzp" }
                 $Environments[1] { "wivpaap000mzzz0" }
                 $Environments[2] { "wqvpaap000ozzz1" }
-                $Environments[3] { "wpvpaap000ozzzh" }
+                $Environments[3] { "wpvpaap000ozzzh, wpvpaap000ozzzf" }
             }
         }
     }
