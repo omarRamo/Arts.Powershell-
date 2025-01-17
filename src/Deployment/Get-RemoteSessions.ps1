@@ -29,21 +29,24 @@ function Get-RemoteSessions {
 
     $environments = @("Development", "Integration", "Preproduction", "Production")
 
+
+    # Using aliases for machines, can be used in PSSession only if hosts are trusted in winrm
+    # Use command line winrm set winrm/config/client @{TrustedHosts="alias1, alias2"} to set trusted hosts
     $machinesNames = switch ($Type) {
         "Web" { 
             Switch ($Environment) {
-                $Environments[0] { @("wdvpaap000lzzzx") }
-                $Environments[1] { @("wivpaap000lzzzy") }
-                $Environments[2] { @("wqvpaap000nzzz2", "wqvpaap000nzzz3") }
-                $Environments[3] { @("wpvpaap000ozzzg", "wpvpaap000ozzze") }
+                $Environments[0] { @("artsWeb1-dev") }
+                $Environments[1] { @("artsWeb1-int") }
+                $Environments[2] { @("artsWeb1-pre", "artsWeb2-pre") }
+                $Environments[3] { @("artsWeb1-prd", "artsWeb2-prd") }
             }
         }
         "Console" { 
             Switch ($Environment) {
-                $Environments[0] { "wdvpaap000lzzzp" }
-                $Environments[1] { "wivpaap000mzzz0" }
-                $Environments[2] { "wqvpaap000ozzz1" }
-                $Environments[3] { @("wpvpaap000ozzzh", "wpvpaap000ozzzf") }
+                $Environments[0] { "artsBatch1-dev" }
+                $Environments[1] { "artsBatch1-int" }
+                $Environments[2] { "artsBatch1-pre" }
+                $Environments[3] { @("artsBatch1-prd", "artsBatch2-prd") }
             }
         }
     }
