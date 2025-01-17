@@ -43,7 +43,8 @@ function Send-WindowsServiceApp {
 	$DestinationFolderPath = "D:\SOFT\$ProjectName\"
 	$ExecutableFile = "$ProjectName.exe"
 	$ExecutableFilePath = Join-Path $DestinationFolderPath $ExecutableFile
-	$sessions = Get-RemoteSessions -Environment $Environment -Account $Account -Password $Password -Type $HostingType
+	# For some godforsaken reason, Powershell unrolls single item arrays
+	$sessions = @(Get-RemoteSessions -Environment $Environment -Account $Account -Password $Password -Type $HostingType)
 
 	foreach($session in $sessions) {
 		# Stop and kill service
@@ -75,8 +76,7 @@ function Send-WindowsServiceApp {
 					Write-Host "Installing and starting service... " -NoNewline
 					Set-Location $Using:DestinationFolderPath 
 					& .\$($Using:ExecutableFile) install -username $SvcArtsUsername -password ""$SvcArtsPassword""
-					Start-Service -Name $Using:ServiceName
-					Write-Host "Installed and started !"
+
 				}
 				"Native" {
 					if (!(Get-Service $Using:ServiceName -ErrorAction SilentlyContinue)) {
@@ -86,9 +86,14 @@ function Send-WindowsServiceApp {
 						Write-Host "Service created"
 					}
 					Write-Host "Installing and starting service... " -NoNewline
-					Start-Service -Name $Using:ServiceName
-					Write-Host "Installed and started !"
 				}
+			}
+			if (($Using:sessions).IndexOf($Using:session).Equals(0)) {
+				Write-Host "Service is installed on primary server, it will start"
+				Start-Service -Name $Using:ServiceName
+				Write-Host "Installed and started !"
+			} else {
+				Write-Host "Service is not installed on primary server, it will not start"
 			}
 		}
 		Remove-PSSession $session

@@ -46,6 +46,8 @@ function Get-RemoteSessions {
                 $Environments[0] { "artsBatch1-dev" }
                 $Environments[1] { "artsBatch1-int" }
                 $Environments[2] { "artsBatch1-pre" }
+                # first server is the primary server, where the service will be running
+                # other servers are backup where service will start when primary server is down
                 $Environments[3] { @("artsBatch1-prd", "artsBatch2-prd") }
             }
         }
