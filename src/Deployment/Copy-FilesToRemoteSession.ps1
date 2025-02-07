@@ -46,7 +46,7 @@ function Copy-FilesToRemoteSession {
     }   
 
     Write-Host "Copying app files from '$SourcePath' to '$RemotePath' on '$($Session.ComputerName)'... "
-    Copy-Item (Join-Path $SourcePath "\*") -Destination $RemotePath -ToSession $Session -Verbose -Recurse -Force
+    Copy-Item (Join-Path $SourcePath "\*") -Destination $RemotePath -ToSession $Session -Verbose -Recurse -Force -ErrorAction Stop
     if ($Error.Count -eq 0) {
         Write-Host "Copied!"
     }
